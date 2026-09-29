@@ -106,7 +106,11 @@ h2, .trade-panel h2 { color: var(--ink); font: 600 1.24rem/1.2 var(--sans); lett
 .amount-input { border-color: #ccd7da; border-radius: 3px; }
 .amount-input:focus-within { border-color: #087f73; box-shadow: 0 0 0 2px #087f731a; }
 .amount-input input { padding: 9px 0; font-size: 1.05rem; }
+.lot-input span { color: #728087; font: .59rem var(--mono); text-transform: uppercase; }
+.lot-description { display: block; margin-top: 6px; color: #819096; font: .57rem var(--mono); }
 .quick-amounts { gap: 5px; margin: 8px 0 16px; }
+.lot-presets { margin-top: 10px; }
+.lot-presets button { padding: 7px 2px; color: #44555b; font: .62rem var(--mono); }
 .quick-amounts button { border: 1px solid #e3e8e9; border-radius: 3px; background: #fff; font-size: .57rem; }
 .quick-amounts button:hover { color: #08766b; background: #edf6f4; }
 .trade-button { border-radius: 3px; background: #087f73; font-size: .72rem; }
@@ -122,6 +126,8 @@ h2, .trade-panel h2 { color: var(--ink); font: 600 1.24rem/1.2 var(--sans); lett
 .position-metric span { font-size: .5rem; }
 .position-metric strong { font-size: .63rem; }
 .position-row .sell-position { border-color: #d3dddf; border-radius: 3px; color: #526168; font-size: .58rem; }
+.position-row .sell-position { min-height: 30px; color: #a33f47; border-color: #e2c5c7; font-weight: 600; }
+.position-row .sell-position:hover { color: #fff; background: #b64d54; border-color: #b64d54; }
 .activity-list { background: #fff; }
 .activity-row { padding: 11px 14px; }
 .activity-copy strong { font-size: .66rem; }

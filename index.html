@@ -117,18 +117,19 @@
             <b id="selected-price">—</b>
           </div>
           <div class="trade-tabs" role="tablist" aria-label="Type d'ordre">
-            <button class="trade-tab is-active" id="buy-tab" type="button" role="tab" aria-selected="true" data-mode="buy">Acheter</button>
-            <button class="trade-tab" id="sell-tab" type="button" role="tab" aria-selected="false" data-mode="sell">Vendre</button>
+            <button class="trade-tab is-active" id="buy-tab" type="button" role="tab" aria-selected="true" data-mode="buy">Achat</button>
+            <button class="trade-tab" id="sell-tab" type="button" role="tab" aria-selected="false" data-mode="sell">Vente</button>
           </div>
           <form id="trade-form">
-            <label class="form-label" for="trade-amount">Montant de l'ordre (€)</label>
-            <div class="amount-input"><input id="trade-amount" inputmode="decimal" type="number" min="1" step="any" value="250" /><span>€</span></div>
-            <div class="quick-amounts" aria-label="Montants rapides">
-              <button type="button" data-amount="100">100 €</button><button type="button" data-amount="500">500 €</button><button type="button" data-amount="1000">1 000 €</button><button type="button" data-amount="all">Max</button>
+            <label class="form-label" for="trade-lots">Volume (lots)</label>
+            <div class="amount-input lot-input"><input id="trade-lots" inputmode="decimal" type="number" min="0.01" step="0.01" value="0.01" /><span>lots</span></div>
+            <small class="lot-description" id="lot-description">1 lot = 100 000 EUR</small>
+            <div class="quick-amounts lot-presets" aria-label="Volumes prédéfinis">
+              <button type="button" data-lots="0.01">0,01</button><button type="button" data-lots="0.05">0,05</button><button type="button" data-lots="0.10">0,10</button><button type="button" data-lots="0.50">0,50</button>
             </div>
-            <button class="trade-button" id="trade-submit" type="submit">Acheter du Bitcoin <span aria-hidden="true">→</span></button>
+            <button class="trade-button" id="trade-submit" type="submit">Acheter</button>
           </form>
-          <p class="trade-disclaimer">Aucun achat réel. Les ordres sont enregistrés localement dans ton navigateur.</p>
+          <p class="trade-disclaimer">Simulation sans levier. Les ordres sont virtuels et conservés sur cet appareil.</p>
         </aside>
       </div>
 
