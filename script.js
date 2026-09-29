@@ -163,7 +163,7 @@ function renderMarket() {
   });
   marketList.innerHTML = visible.map((asset) => {
     const marketName = asset.market === "forex" ? "Forex" : "Crypto";
-    return `<tr>
+    return `<tr data-asset-id="${asset.id}" class="${asset.id === selectedId ? "is-selected" : ""}">
       <td><div class="asset-name"><span class="asset-icon ${asset.className}">${asset.icon}</span><div><strong>${asset.name}</strong><span>${asset.symbol}</span></div></div></td>
       <td class="price">${priceFormat(prices[asset.id]?.eur || 0, asset)}</td>
       <td><span class="market-tag ${asset.market}">${marketName}</span></td>

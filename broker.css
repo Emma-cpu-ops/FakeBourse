@@ -195,3 +195,52 @@ footer { padding: 18px 0 26px; color: #88959b; font-size: .52rem; }
   footer { display: block; line-height: 1.8; }
   footer span { display: block; }
 }
+
+body { background: #eef2ef; }
+.app-shell { width: min(1600px, calc(100% - 56px)); }
+.topbar { border: 0; border-radius: 0 0 8px 8px; box-shadow: 0 5px 18px #192b2a12; }
+.terminal-nav a { border-bottom-color: transparent; }
+.terminal-nav a:hover, .terminal-nav a:focus-visible { border-bottom-color: #66c5ae; }
+.overview { gap: 10px; overflow: visible; border: 0; background: transparent; }
+.balance-card, .stat-card { border: 0; border-radius: 7px; box-shadow: 0 3px 15px #253b3510; }
+.stat-card { background: #fff; }
+.stat-card:nth-child(n) { border-left: 0; }
+.workspace { gap: 22px; }
+.chart-panel, .market-table-wrap, .trade-panel { border: 0; border-radius: 7px; box-shadow: 0 3px 16px #253b3510; }
+.chart-toolbar, .chart-caption { border: 0; }
+.chart-toolbar { background: #fff; }
+.chart-frame { border: 0; }
+.indicator-controls { border: 0; background: #f8faf9; }
+.market-table th { border: 0; background: #f7f9f8; }
+.market-table td { border: 0; }
+.market-table tbody tr { cursor: pointer; transition: background-color .14s ease; }
+.market-table tbody tr:not(.is-selected):hover td { background: #f6f9f7; }
+.market-table tbody tr.is-selected td { background: #eaf4ef; }
+.market-table tbody tr.is-selected td:first-child { box-shadow: inset 3px 0 0 #298775; }
+.market-table tbody tr.is-selected .asset-name strong { color: #126b5e; }
+.trade-panel { top: 14px; }
+.trade-panel-head { border: 0; }
+.selected-asset { border: 0; border-radius: 5px; background: #f7f9f8; padding: 11px; }
+.trade-tabs { border: 0; background: #edf1ef; }
+.amount-input { border-color: #e1e8e4; }
+.quick-amounts button { border-color: transparent; background: #f1f5f3; }
+.portfolio-section, .activity-section { margin-top: 30px; }
+.portfolio-list, .activity-list { border: 0; background: transparent; }
+.position-row { margin-bottom: 7px; border: 0; border-radius: 6px; box-shadow: 0 2px 12px #253b350c; }
+.empty-portfolio { border: 0; border-radius: 6px; }
+.activity-list { padding-top: 2px; }
+.activity-row { margin-bottom: 6px; border: 0; border-radius: 6px; box-shadow: 0 2px 12px #253b350c; }
+footer { border: 0; }
+
+@media (max-width: 820px) {
+  .overview { gap: 8px; }
+  .workspace { gap: 16px; }
+}
+
+@media (max-width: 620px) {
+  .app-shell { width: calc(100% - 24px); }
+  .overview { gap: 7px; }
+  .chart-panel, .market-table-wrap, .trade-panel { border-radius: 6px; }
+  .market-table tbody tr.is-selected td:first-child { box-shadow: inset 2px 0 0 #298775; }
+  .position-row { margin-bottom: 6px; }
+}
