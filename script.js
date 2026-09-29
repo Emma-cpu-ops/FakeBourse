@@ -18,6 +18,11 @@ const FOREX_ASSETS = [
 
 const ASSETS = [...FOREX_ASSETS, ...CRYPTO_ASSETS];
 const FX_RATE_SYMBOLS = ["EUR", "GBP", "JPY", "CHF", "CAD", "AUD", "NZD"].join(",");
+const INDICATORS = {
+  sma: "MASimple@tv-basicstudies",
+  ema: "MAExp@tv-basicstudies",
+  rsi: "RSI@tv-basicstudies",
+};
 
 const FALLBACK_PRICES = {
   bitcoin: { eur: 83025.42, eur_24h_change: 1.82 },
@@ -37,8 +42,10 @@ const FALLBACK_PRICES = {
 const currency = new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const number = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 6 });
 const storeKey = "fakeBoursePortfolioV1";
+const indicatorStoreKey = "fakeBourseIndicatorsV1";
 let state = readState();
 let prices = structuredClone(FALLBACK_PRICES);
+let activeIndicators = readIndicatorPreferences();
 let selectedId = "fx-eurusd";
 let mode = "buy";
 let marketFilter = "all";
@@ -62,6 +69,14 @@ function readState() {
     if (saved && Number.isFinite(saved.cash) && saved.positions && saved.activity) return saved;
   } catch (_) { /* Start a fresh demo if storage is unavailable. */ }
   return { cash: 10000, positions: {}, activity: [] };
+}
+
+function readIndicatorPreferences() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(indicatorStoreKey));
+    if (Array.isArray(saved)) return saved.filter((id) => Object.prototype.hasOwnProperty.call(INDICATORS, id));
+  } catch (_) { /* Use the chart without indicators if preferences are unavailable. */ }
+  return [];
 }
 
 function saveState() { localStorage.setItem(storeKey, JSON.stringify(state)); }
@@ -117,23 +132,8 @@ function renderSelectedAsset() {
   const asset = selectedAsset();
   const quote = prices[asset.id];
   document.querySelector("#selected-asset").innerHTML = `<div class="asset-icon ${asset.className}">${asset.icon}</div><div><strong>${asset.name}</strong><span>${asset.symbol}</span></div><b id="selected-price">${priceFormat(quote.eur, asset)}</b>`;
-  document.querySelector("#trade-action-word").textContent = mode === "buy" ? "investir" : "retirer";
   document.querySelector("#trade-submit").innerHTML = `${mode === "buy" ? "Acheter" : "Vendre"} ${mode === "buy" ? "du" : "tes"} ${asset.name} <span aria-hidden="true">→</span>`;
   document.querySelector("#trade-submit").classList.toggle("is-sell", mode === "sell");
-  updateTradeEstimate();
-}
-
-function updateTradeEstimate() {
-  const asset = selectedAsset();
-  const price = prices[asset.id]?.eur || 0;
-  const requested = Number(amountInput.value) || 0;
-  const position = state.positions[asset.id];
-  const available = mode === "buy" ? state.cash : (position?.quantity || 0) * price;
-  const validAmount = Math.min(Math.max(requested, 0), available);
-  document.querySelector("#estimated-amount").textContent = asset.market === "forex"
-    ? `${shortAmount(price ? validAmount / price : 0)} unités`
-    : `${shortAmount(price ? validAmount / price : 0)} ${asset.symbol}`;
-  document.querySelector("#reference-price").textContent = priceFormat(price, asset);
 }
 
 function renderPortfolio() {
@@ -343,7 +343,10 @@ async function renderChart() {
     enable_publishing: false,
     allow_symbol_change: false,
     hide_side_toolbar: true,
+    hide_top_toolbar: true,
+    hide_legend: true,
     save_image: false,
+    studies: activeIndicators.map((id) => INDICATORS[id]),
   });
 }
 
@@ -365,13 +368,23 @@ document.querySelectorAll("[data-interval]").forEach((button) => button.addEvent
   document.querySelectorAll("[data-interval]").forEach((intervalButton) => intervalButton.classList.toggle("is-active", intervalButton === button));
   renderChart();
 }));
+document.querySelectorAll("[data-indicator]").forEach((control) => {
+  const id = control.dataset.indicator;
+  control.checked = activeIndicators.includes(id);
+  control.addEventListener("change", () => {
+    activeIndicators = control.checked
+      ? [...new Set([...activeIndicators, id])]
+      : activeIndicators.filter((indicator) => indicator !== id);
+    localStorage.setItem(indicatorStoreKey, JSON.stringify(activeIndicators));
+    renderChart();
+  });
+});
 portfolioList.addEventListener("click", (event) => {
   const button = event.target.closest("[data-sell-id]");
   if (!button) return;
   chooseAsset(button.dataset.sellId);
   setMode("sell");
   amountInput.value = Math.floor(((state.positions[button.dataset.sellId]?.quantity || 0) * prices[button.dataset.sellId].eur) * 100) / 100;
-  updateTradeEstimate();
 });
 document.querySelectorAll(".trade-tab").forEach((button) => button.addEventListener("click", () => setMode(button.dataset.mode)));
 document.querySelector("#trade-form").addEventListener("submit", (event) => { event.preventDefault(); trade(); });
@@ -381,9 +394,7 @@ document.querySelectorAll("[data-amount]").forEach((button) => button.addEventLi
     const held = state.positions[selectedId]?.quantity || 0;
     amountInput.value = Math.floor((mode === "buy" ? state.cash : held * prices[selectedId].eur) * 100) / 100;
   } else amountInput.value = requested;
-  updateTradeEstimate();
 }));
-amountInput.addEventListener("input", updateTradeEstimate);
 search.addEventListener("input", renderMarket);
 document.querySelector("#reset-button").addEventListener("click", () => {
   if (!confirm("Réinitialiser le portefeuille virtuel et l'historique ?")) return;

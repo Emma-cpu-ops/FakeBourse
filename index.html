@@ -7,34 +7,30 @@
     <title>FakeBourse — Simulateur de trading fictif</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="broker.css" />
   </head>
   <body>
-    <main class="app-shell">
+    <main class="app-shell" id="top">
       <header class="topbar">
         <a class="brand" href="#top" aria-label="FakeBourse, accueil">
           <span class="brand-mark" aria-hidden="true">↗</span>
           <span>fake<span>bourse</span></span>
         </a>
-        <div class="market-status"><i aria-hidden="true"></i><span id="market-status">Marché en direct</span></div>
+        <nav class="terminal-nav" aria-label="Navigation principale">
+          <a href="#market-title">Marchés</a><a href="#portfolio-title">Portefeuille</a><a href="#activity-title">Historique</a>
+        </nav>
+        <div class="market-status"><i aria-hidden="true"></i><span id="market-status">Simulation en direct</span></div>
         <div class="topbar-actions">
           <button class="icon-button" id="reset-button" type="button" title="Réinitialiser le portefeuille" aria-label="Réinitialiser le portefeuille">↺</button>
-          <button class="profile-button" type="button" aria-label="Profil de Camille">C</button>
+          <span class="account-badge">COMPTE DÉMO</span>
         </div>
       </header>
 
-      <section class="hero" id="top" aria-labelledby="page-title">
-        <div>
-          <p class="eyebrow">SALLE DES MARCHÉS / MODE BAC À SABLE</p>
-          <h1 id="page-title">Fais bouger ton argent.<br /><em>Pas ton épargne.</em></h1>
-          <p class="lede">Forex et cryptos, graphiques de marché et 10 000 € virtuels pour tester tes stratégies sans risque financier.</p>
-        </div>
-        <aside class="hero-note">
-          <span class="note-symbol" aria-hidden="true">✦</span>
-          <p>Tout ici est fictif.</p>
-          <small>Le graphique suit le marché réel. Les variations Forex du simulateur sont fictives et ton portefeuille reste enregistré sur cet appareil.</small>
-        </aside>
+      <section class="terminal-heading" aria-labelledby="page-title">
+        <div><p class="eyebrow">TRADING / COMPTE VIRTUEL</p><h1 id="page-title">Vue du marché</h1></div>
+        <span class="session-label">SIMULATION · EUR</span>
       </section>
 
       <section class="overview" aria-label="Vue d'ensemble du portefeuille">
@@ -65,8 +61,8 @@
         <section class="market-panel" aria-labelledby="market-title">
           <div class="section-heading">
             <div>
-              <p class="eyebrow">LES ACTIFS DU MOMENT</p>
-              <h2 id="market-title">Le marché, en direct.</h2>
+              <p class="eyebrow">MARCHÉS / FOREX ET CRYPTO</p>
+              <h2 id="market-title">Terminal de marché</h2>
             </div>
             <label class="search-box" for="asset-search">
               <span aria-hidden="true">⌕</span>
@@ -90,7 +86,13 @@
               </div>
             </div>
             <div id="tradingview-chart" class="chart-frame" aria-live="polite"><p>Chargement du graphique…</p></div>
-            <p class="chart-caption">Graphique TradingView sur le marché réel. Les ordres et les variations de démonstration restent fictifs.</p>
+            <div class="indicator-controls" role="group" aria-label="Indicateurs techniques">
+              <span class="indicator-heading">INDICATEURS</span>
+              <label><input type="checkbox" data-indicator="sma" /> SMA 20</label>
+              <label><input type="checkbox" data-indicator="ema" /> EMA 20</label>
+              <label><input type="checkbox" data-indicator="rsi" /> RSI 14</label>
+            </div>
+            <p class="chart-caption">Cours du marché réel · ordres fictifs · préférences des indicateurs conservées sur cet appareil.</p>
           </section>
           <div class="market-table-wrap">
             <table class="market-table">
@@ -110,8 +112,8 @@
             <span class="demo-pill">FICTIF</span>
           </div>
           <div class="selected-asset" id="selected-asset">
-            <div class="asset-icon bitcoin">₿</div>
-            <div><strong>Bitcoin</strong><span>BTC</span></div>
+            <div class="asset-icon forex-eur">€</div>
+            <div><strong>Euro / Dollar US</strong><span>EUR/USD</span></div>
             <b id="selected-price">—</b>
           </div>
           <div class="trade-tabs" role="tablist" aria-label="Type d'ordre">
@@ -119,14 +121,10 @@
             <button class="trade-tab" id="sell-tab" type="button" role="tab" aria-selected="false" data-mode="sell">Vendre</button>
           </div>
           <form id="trade-form">
-            <label class="form-label" for="trade-amount">Montant à <span id="trade-action-word">investir</span></label>
+            <label class="form-label" for="trade-amount">Montant de l'ordre (€)</label>
             <div class="amount-input"><input id="trade-amount" inputmode="decimal" type="number" min="1" step="any" value="250" /><span>€</span></div>
             <div class="quick-amounts" aria-label="Montants rapides">
               <button type="button" data-amount="100">100 €</button><button type="button" data-amount="500">500 €</button><button type="button" data-amount="1000">1 000 €</button><button type="button" data-amount="all">Max</button>
-            </div>
-            <div class="order-summary">
-              <span>Tu recevras environ</span><strong id="estimated-amount">— BTC</strong>
-              <span>Cours de référence</span><strong id="reference-price">—</strong>
             </div>
             <button class="trade-button" id="trade-submit" type="submit">Acheter du Bitcoin <span aria-hidden="true">→</span></button>
           </form>
