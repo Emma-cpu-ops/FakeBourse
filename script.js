@@ -14,7 +14,7 @@ const FOREX_ASSETS = [
   { id: "fx-usdcad", name: "Dollar US / Dollar canadien", symbol: "USD/CAD", icon: "C$", className: "forex-cad", chartSymbol: "FX:USDCAD", rate: (rates) => rates.CAD },
   { id: "fx-audusd", name: "Dollar australien / US", symbol: "AUD/USD", icon: "A$", className: "forex-aud", chartSymbol: "FX:AUDUSD", rate: (rates) => 1 / rates.AUD },
   { id: "fx-nzdusd", name: "Dollar néo-zélandais / US", symbol: "NZD/USD", icon: "NZ$", className: "forex-nzd", chartSymbol: "FX:NZDUSD", rate: (rates) => 1 / rates.NZD },
-];
+].map((asset) => ({ ...asset, market: "forex" }));
 
 const ASSETS = [...FOREX_ASSETS, ...CRYPTO_ASSETS];
 const FX_RATE_SYMBOLS = ["EUR", "GBP", "JPY", "CHF", "CAD", "AUD", "NZD"].join(",");
@@ -76,7 +76,6 @@ function priceFormat(value, asset = null) {
   return new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", minimumFractionDigits: 4, maximumFractionDigits: 4 }).format(value);
 }
 function shortAmount(value) { return number.format(value); }
-function percentFormat(value) { return `${value >= 0 ? "+" : ""}${value.toFixed(2).replace(".", ",")} %`; }
 function totalInvested() { return Object.entries(state.positions).reduce((sum, [id, position]) => sum + position.quantity * (prices[id]?.eur || position.averagePrice), 0); }
 function portfolioTotal() { return state.cash + totalInvested(); }
 function totalCost() { return Object.values(state.positions).reduce((sum, position) => sum + position.cost, 0); }
@@ -90,16 +89,14 @@ function renderMarket() {
   });
   marketList.innerHTML = visible.map((asset) => {
     const quote = prices[asset.id];
-    const change = quote?.eur_24h_change ?? 0;
     const marketName = asset.market === "forex" ? "Forex" : "Crypto";
     return `<tr>
       <td><div class="asset-name"><span class="asset-icon ${asset.className}">${asset.icon}</span><div><strong>${asset.name}</strong><span>${asset.symbol}</span></div></div></td>
       <td class="price">${priceFormat(quote?.eur || 0, asset)}</td>
-      <td class="change ${change >= 0 ? "up" : "down"}">${change >= 0 ? "↗" : "↘"} ${percentFormat(change)}</td>
       <td><span class="market-tag ${asset.market}">${marketName}</span></td>
       <td><button class="buy-small" type="button" data-asset-id="${asset.id}">Trader</button></td>
     </tr>`;
-  }).join("") || `<tr><td colspan="5" class="empty-activity">Aucun actif ne correspond à cette recherche.</td></tr>`;
+  }).join("") || `<tr><td colspan="4" class="empty-activity">Aucun actif ne correspond à cette recherche.</td></tr>`;
 }
 
 function renderOverview() {

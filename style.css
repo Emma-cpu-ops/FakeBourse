@@ -1,3 +1,9 @@
+.asset-name > .asset-icon { display: grid; place-items: center; margin-top: 0; color: #fff; font: 500 .96rem var(--serif); line-height: 1; text-align: center; }
+.asset-name > .asset-icon.forex-chf, .asset-name > .asset-icon.forex-cad, .asset-name > .asset-icon.forex-aud, .asset-name > .asset-icon.forex-nzd { font: 700 .54rem var(--sans); letter-spacing: 0; }
+@media (max-width: 620px) {
+  .market-table th:nth-child(3), .market-table td:nth-child(3) { display: none; }
+  .market-table th:nth-child(4):not(.sr-only), .market-table td:nth-child(4):not(.empty-activity) { display: table-cell; }
+}
 .market-filters { display: flex; gap: 6px; margin: 0 0 15px; }
 .market-filter { padding: 7px 13px; border: 1px solid var(--line); background: #fff; color: var(--muted); border-radius: 3px; font-size: .68rem; }
 .market-filter:hover, .market-filter.is-active { background: var(--ink); border-color: var(--ink); color: #fff; }
