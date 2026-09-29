@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="FakeBourse, un simulateur de trading crypto avec argent virtuel." />
+    <title>FakeBourse — Investir sans se ruiner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#top" aria-label="FakeBourse, accueil">
+          <span class="brand-mark" aria-hidden="true">↗</span>
+          <span>fake<span>bourse</span></span>
+        </a>
+        <div class="market-status"><i aria-hidden="true"></i><span id="market-status">Marché en direct</span></div>
+        <div class="topbar-actions">
+          <button class="icon-button" id="reset-button" type="button" title="Réinitialiser le portefeuille" aria-label="Réinitialiser le portefeuille">↺</button>
+          <button class="profile-button" type="button" aria-label="Profil de Camille">C</button>
+        </div>
+      </header>
+
+      <section class="hero" id="top" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">SALLE DES MARCHÉS / MODE BAC À SABLE</p>
+          <h1 id="page-title">Fais bouger ton argent.<br /><em>Pas ton épargne.</em></h1>
+          <p class="lede">Un terrain de jeu pour apprendre les réflexes du trading, avec des cours crypto réels et exactement zéro risque financier.</p>
+        </div>
+        <aside class="hero-note">
+          <span class="note-symbol" aria-hidden="true">✦</span>
+          <p>Tout ici est fictif.</p>
+          <small>Les prix viennent du marché crypto. Ton portefeuille, lui, reste bien au chaud dans ce navigateur.</small>
+        </aside>
+      </section>
+
+      <section class="overview" aria-label="Vue d'ensemble du portefeuille">
+        <article class="balance-card">
+          <div class="card-label"><span>VALEUR TOTALE</span><span class="wallet-dot">PORTEFEUILLE</span></div>
+          <p class="balance" id="portfolio-total">10 000,00 €</p>
+          <p class="performance is-up" id="portfolio-performance">↗ +0,00 € <span>depuis le départ</span></p>
+          <div class="balance-orb" aria-hidden="true"></div>
+        </article>
+        <article class="stat-card">
+          <span class="card-label">SOLDE DISPONIBLE</span>
+          <p id="cash-balance">10 000,00 €</p>
+          <small>Prêt à être investi</small>
+        </article>
+        <article class="stat-card">
+          <span class="card-label">POSITIONS</span>
+          <p id="positions-count">0</p>
+          <small id="positions-caption">Aucune ligne ouverte</small>
+        </article>
+        <article class="stat-card market-card">
+          <span class="card-label">MISE À JOUR</span>
+          <p id="updated-at">—</p>
+          <small><i></i> Automatique, toutes les 60 s</small>
+        </article>
+      </section>
+
+      <div class="workspace">
+        <section class="market-panel" aria-labelledby="market-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">LES ACTIFS DU MOMENT</p>
+              <h2 id="market-title">Le marché, en direct.</h2>
+            </div>
+            <label class="search-box" for="asset-search">
+              <span aria-hidden="true">⌕</span>
+              <input id="asset-search" type="search" placeholder="Rechercher un actif" autocomplete="off" />
+            </label>
+          </div>
+          <div class="market-table-wrap">
+            <table class="market-table">
+              <thead><tr><th scope="col">ACTIF</th><th scope="col">PRIX</th><th scope="col">24 H</th><th scope="col">TENDANCE</th><th scope="col"><span class="sr-only">Acheter</span></th></tr></thead>
+              <tbody id="market-list" aria-live="polite"></tbody>
+            </table>
+          </div>
+          <p class="market-foot" id="market-message">Connexion aux cours CoinGecko…</p>
+        </section>
+
+        <aside class="trade-panel" aria-labelledby="trade-title">
+          <div class="trade-panel-head">
+            <div>
+              <p class="eyebrow">NOUVEL ORDRE</p>
+              <h2 id="trade-title">Passer à l’action.</h2>
+            </div>
+            <span class="demo-pill">FICTIF</span>
+          </div>
+          <div class="selected-asset" id="selected-asset">
+            <div class="asset-icon bitcoin">₿</div>
+            <div><strong>Bitcoin</strong><span>BTC</span></div>
+            <b id="selected-price">—</b>
+          </div>
+          <div class="trade-tabs" role="tablist" aria-label="Type d'ordre">
+            <button class="trade-tab is-active" id="buy-tab" type="button" role="tab" aria-selected="true" data-mode="buy">Acheter</button>
+            <button class="trade-tab" id="sell-tab" type="button" role="tab" aria-selected="false" data-mode="sell">Vendre</button>
+          </div>
+          <form id="trade-form">
+            <label class="form-label" for="trade-amount">Montant à <span id="trade-action-word">investir</span></label>
+            <div class="amount-input"><input id="trade-amount" inputmode="decimal" type="number" min="1" step="any" value="250" /><span>€</span></div>
+            <div class="quick-amounts" aria-label="Montants rapides">
+              <button type="button" data-amount="100">100 €</button><button type="button" data-amount="500">500 €</button><button type="button" data-amount="1000">1 000 €</button><button type="button" data-amount="all">Max</button>
+            </div>
+            <div class="order-summary">
+              <span>Tu recevras environ</span><strong id="estimated-amount">— BTC</strong>
+              <span>Cours de référence</span><strong id="reference-price">—</strong>
+            </div>
+            <button class="trade-button" id="trade-submit" type="submit">Acheter du Bitcoin <span aria-hidden="true">→</span></button>
+          </form>
+          <p class="trade-disclaimer">Aucun achat réel. Les ordres sont enregistrés localement dans ton navigateur.</p>
+        </aside>
+      </div>
+
+      <section class="portfolio-section" aria-labelledby="portfolio-title">
+        <div class="section-heading">
+          <div><p class="eyebrow">TES POSITIONS</p><h2 id="portfolio-title">Ce que tu as en jeu.</h2></div>
+          <span class="positions-value" id="invested-value">0,00 € investis</span>
+        </div>
+        <div class="portfolio-list" id="portfolio-list">
+          <div class="empty-portfolio">
+            <span aria-hidden="true">◎</span>
+            <div><strong>Ton portefeuille attend son premier mouvement.</strong><p>Choisis un actif, fixe un montant et teste ta première position.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="activity-section" aria-labelledby="activity-title">
+        <div class="section-heading"><div><p class="eyebrow">JOURNAL DE BORD</p><h2 id="activity-title">Derniers mouvements.</h2></div><span class="activity-caption">Conservé sur cet appareil</span></div>
+        <div class="activity-list" id="activity-list">
+          <p class="empty-activity">Pas encore de mouvement. Le marché ne va pas s'échanger tout seul.</p>
+        </div>
+      </section>
+
+      <footer><span>© 2026 FAKEBOURSE</span><span>COURS CRYPTO : COINGECKO · <strong>CECI N’EST PAS UN CONSEIL FINANCIER</strong></span></footer>
+    </main>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
