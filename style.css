@@ -1,3 +1,31 @@
+.market-filters { display: flex; gap: 6px; margin: 0 0 15px; }
+.market-filter { padding: 7px 13px; border: 1px solid var(--line); background: #fff; color: var(--muted); border-radius: 3px; font-size: .68rem; }
+.market-filter:hover, .market-filter.is-active { background: var(--ink); border-color: var(--ink); color: #fff; }
+.chart-panel { overflow: hidden; margin-bottom: 19px; background: #fff; border: 1px solid var(--line); border-radius: 4px; }
+.chart-toolbar { min-height: 57px; padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--line); }
+.chart-toolbar > div:first-child { display: flex; align-items: baseline; gap: 11px; }
+.chart-label { color: #96939e; font: .57rem var(--mono); letter-spacing: .07em; }
+.chart-toolbar strong { color: var(--ink); font: 500 .91rem var(--mono); }
+.chart-intervals { display: flex; gap: 3px; }
+.chart-intervals button { min-width: 35px; padding: 6px; border: 0; border-radius: 2px; color: #777582; background: transparent; font-size: .64rem; }
+.chart-intervals button:hover, .chart-intervals button.is-active { color: #fff; background: var(--purple); }
+.chart-frame { height: 420px; min-height: 320px; display: grid; place-items: center; color: var(--muted); font-size: .76rem; }
+#tv-chart-container { width: 100%; height: 100%; }
+.chart-caption { margin: 0; padding: 9px 14px; border-top: 1px solid var(--line); color: #8c8994; font-size: .63rem; }
+.market-tag { display: inline-block; color: #777582; font: .57rem var(--mono); text-transform: uppercase; letter-spacing: .04em; }
+.market-tag.forex { color: #237666; }
+.market-tag.crypto { color: #a56c26; }
+.forex-eur { background: #287b70; }
+.forex-gbp { background: #76538c; }
+.forex-jpy { background: #c55c4c; }
+.forex-chf { background: #bb4551; }
+.forex-cad { background: #cb7643; }
+.forex-aud { background: #3683a3; }
+.forex-nzd { background: #617d43; }
+.market-status i { animation: market-pulse 1.7s ease-out infinite; }
+@keyframes market-pulse { 0% { box-shadow: 0 0 0 0 #22bd8355; } 100% { box-shadow: 0 0 0 7px #22bd8300; } }
+@media (max-width: 900px) { .chart-frame { height: 380px; } }
+@media (max-width: 620px) { .chart-toolbar { align-items: flex-start; flex-direction: column; }.chart-frame { height: 340px; min-height: 280px; }.chart-caption { line-height: 1.45; }.market-filters { margin-bottom: 12px; } }
 :root {
   --ink: #171a2a;
   --muted: #6f7180;

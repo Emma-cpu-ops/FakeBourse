@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="FakeBourse, un simulateur de trading crypto avec argent virtuel." />
-    <title>FakeBourse — Investir sans se ruiner</title>
+    <meta name="description" content="FakeBourse, un simulateur de trading Forex et crypto avec argent virtuel." />
+    <title>FakeBourse — Simulateur de trading fictif</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
@@ -28,12 +28,12 @@
         <div>
           <p class="eyebrow">SALLE DES MARCHÉS / MODE BAC À SABLE</p>
           <h1 id="page-title">Fais bouger ton argent.<br /><em>Pas ton épargne.</em></h1>
-          <p class="lede">Un terrain de jeu pour apprendre les réflexes du trading, avec des cours crypto réels et exactement zéro risque financier.</p>
+          <p class="lede">Forex et cryptos, graphiques de marché et 10 000 € virtuels pour tester tes stratégies sans risque financier.</p>
         </div>
         <aside class="hero-note">
           <span class="note-symbol" aria-hidden="true">✦</span>
           <p>Tout ici est fictif.</p>
-          <small>Les prix viennent du marché crypto. Ton portefeuille, lui, reste bien au chaud dans ce navigateur.</small>
+          <small>Le graphique suit le marché réel. Les variations Forex du simulateur sont fictives et ton portefeuille reste enregistré sur cet appareil.</small>
         </aside>
       </section>
 
@@ -57,7 +57,7 @@
         <article class="stat-card market-card">
           <span class="card-label">MISE À JOUR</span>
           <p id="updated-at">—</p>
-          <small><i></i> Automatique, toutes les 60 s</small>
+          <small><i></i> Simulation actualisée en continu</small>
         </article>
       </section>
 
@@ -73,13 +73,32 @@
               <input id="asset-search" type="search" placeholder="Rechercher un actif" autocomplete="off" />
             </label>
           </div>
+          <div class="market-filters" role="group" aria-label="Filtrer les marchés">
+            <button type="button" class="market-filter is-active" data-filter="all" aria-pressed="true">Tout</button>
+            <button type="button" class="market-filter" data-filter="forex" aria-pressed="false">Forex</button>
+            <button type="button" class="market-filter" data-filter="crypto" aria-pressed="false">Crypto</button>
+          </div>
+          <section class="chart-panel" aria-label="Graphique du marché sélectionné">
+            <div class="chart-toolbar">
+              <div><span class="chart-label">GRAPHIQUE DE MARCHÉ</span><strong id="chart-symbol">EUR/USD</strong></div>
+              <div class="chart-intervals" role="group" aria-label="Intervalle du graphique">
+                <button type="button" data-interval="1">1m</button>
+                <button type="button" data-interval="5">5m</button>
+                <button type="button" class="is-active" data-interval="15">15m</button>
+                <button type="button" data-interval="60">1h</button>
+                <button type="button" data-interval="D">1j</button>
+              </div>
+            </div>
+            <div id="tradingview-chart" class="chart-frame" aria-live="polite"><p>Chargement du graphique…</p></div>
+            <p class="chart-caption">Graphique TradingView sur le marché réel. Les ordres et les variations de démonstration restent fictifs.</p>
+          </section>
           <div class="market-table-wrap">
             <table class="market-table">
-              <thead><tr><th scope="col">ACTIF</th><th scope="col">PRIX</th><th scope="col">24 H</th><th scope="col">TENDANCE</th><th scope="col"><span class="sr-only">Acheter</span></th></tr></thead>
+              <thead><tr><th scope="col">ACTIF</th><th scope="col">PRIX</th><th scope="col">24 H</th><th scope="col">MARCHÉ</th><th scope="col"><span class="sr-only">Acheter</span></th></tr></thead>
               <tbody id="market-list" aria-live="polite"></tbody>
             </table>
           </div>
-          <p class="market-foot" id="market-message">Connexion aux cours CoinGecko…</p>
+          <p class="market-foot" id="market-message">Connexion aux références de marché…</p>
         </section>
 
         <aside class="trade-panel" aria-labelledby="trade-title">
@@ -135,7 +154,7 @@
         </div>
       </section>
 
-      <footer><span>© 2026 FAKEBOURSE</span><span>COURS CRYPTO : COINGECKO · <strong>CECI N’EST PAS UN CONSEIL FINANCIER</strong></span></footer>
+      <footer><span>© 2026 FAKEBOURSE</span><span>FOREX : FRANKFURTER · CRYPTO : COINGECKO · <strong>CECI N’EST PAS UN CONSEIL FINANCIER</strong></span></footer>
     </main>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
     <script src="script.js"></script>
