@@ -244,3 +244,105 @@ footer { border: 0; }
   .market-table tbody tr.is-selected td:first-child { box-shadow: inset 2px 0 0 #298775; }
   .position-row { margin-bottom: 6px; }
 }
+
+:root {
+  --ink: #24352e;
+  --muted: #75827b;
+  --line: #e8eeea;
+  --purple: #267765;
+  --purple-dark: #1e6154;
+  --purple-pale: #eaf3ee;
+  --green: #137c5b;
+  --red: #bd5b55;
+  --sans: "Manrope", sans-serif;
+  --serif: "Manrope", sans-serif;
+  --mono: "IBM Plex Mono", monospace;
+}
+
+body { background: #f2f6f3; color: var(--ink); font-family: var(--sans); }
+.app-shell { width: min(1600px, calc(100% - 64px)); }
+.topbar { min-height: 68px; gap: 34px; background: transparent; border: 0; border-radius: 0; box-shadow: none; color: var(--ink); }
+.brand { color: var(--ink); font-size: 1.08rem; font-weight: 800; }
+.brand > span:last-child span { color: #4e9278; }
+.brand-mark { background: #286b57; border-radius: 7px; }
+.terminal-nav { gap: 5px; }
+.terminal-nav a { padding: 0 14px; border: 0; border-radius: 6px; color: #66766e; font-size: .73rem; }
+.terminal-nav a:hover, .terminal-nav a:focus-visible { border: 0; color: #275c4d; background: #e6efe9; }
+.market-status { color: #60726a; }
+.topbar-actions { gap: 12px; }
+.icon-button { border: 0; border-radius: 6px; color: #5c7066; background: transparent; }
+.icon-button:hover { transform: none; color: #225e4e; background: #e6efe9; }
+.account-badge { border: 0; border-radius: 5px; color: #286b57; background: #e4efe8; }
+.terminal-heading { align-items: center; padding: 28px 0 20px; }
+.terminal-heading .eyebrow, .section-heading .eyebrow { color: #73837a; }
+.terminal-heading h1 { font-size: 1.55rem; font-weight: 700; }
+.session-label { padding: 7px 10px; border-radius: 5px; color: #62736a; background: #e7eee9; }
+
+.overview { gap: 12px; margin-top: 0; }
+.balance-card { min-height: 122px; padding: 19px 22px; border-radius: 8px; background: #286b57; box-shadow: none; }
+.stat-card { min-height: 122px; padding: 18px 20px; border-radius: 8px; background: #fff; box-shadow: 0 7px 25px #2942360b; }
+.stat-card > p { font: 600 1.18rem var(--mono); }
+.workspace { margin-top: 24px; }
+.section-heading { margin-bottom: 16px; }
+.section-heading h2, .trade-panel h2 { font-family: var(--sans); font-weight: 700; }
+.market-filters { gap: 4px; padding: 4px; border: 0; border-radius: 6px; background: #e6ede8; }
+.market-filter { border: 0; border-radius: 4px; color: #65766d; }
+.market-filter.is-active { color: #fff; background: #286b57; }
+.chart-panel, .market-table-wrap, .trade-panel { border: 0; border-radius: 8px; box-shadow: 0 7px 25px #2942360b; }
+.chart-toolbar { min-height: 48px; border: 0; }
+.chart-label, .indicator-heading { color: #829087; }
+.chart-toolbar strong { font: 600 .8rem var(--mono); }
+.chart-intervals button { border: 0; border-radius: 4px; }
+.chart-intervals button:hover, .chart-intervals button.is-active { background: #286b57; }
+.indicator-controls { gap: 16px; border: 0; background: #fbfcfb; }
+.indicator-controls label { color: #5e7066; }
+.indicator-controls input { accent-color: #286b57; }
+.chart-caption { color: #89958e; }
+.market-table th { color: #87938d; background: #fbfcfb; }
+.market-table td { padding-top: 12px; padding-bottom: 12px; }
+.market-table tbody tr { border: 0; }
+.market-table tbody tr.is-selected td { background: #e8f2ec; }
+.market-table tbody tr.is-selected td:first-child { box-shadow: none; }
+.market-table tbody tr.is-selected .asset-name strong { color: #286b57; }
+.asset-name strong { font-family: var(--sans); }
+.price, .selected-asset b, .position-metric strong { font-family: var(--mono); }
+.market-tag.forex { color: #467d68; }
+.market-foot { color: #849189; }
+.trade-panel { padding: 20px; }
+.trade-panel-head { border: 0; }
+.demo-pill { border: 0; border-radius: 4px; color: #286b57; background: #eaf3ee; }
+.selected-asset { border: 0; border-radius: 6px; background: #f3f7f4; }
+.trade-tabs { border: 0; border-radius: 5px; background: #edf2ee; }
+.trade-tab { border: 0; border-radius: 4px; }
+.trade-tab.is-active { color: #fff; background: #286b57; }
+.amount-input { border: 0; border-radius: 6px; background: #f1f5f2; }
+.amount-input:focus-within { box-shadow: 0 0 0 2px #2c806b40; }
+.lot-description { color: #839087; }
+.lot-presets button { border: 0; border-radius: 5px; background: #edf3ef; }
+.trade-button { border: 0; border-radius: 5px; background: #286b57; }
+.trade-button:hover { background: #1f5a49; }
+.trade-button.is-sell { background: #b75a52; }
+.trade-disclaimer { color: #87938d; }
+.portfolio-section, .activity-section { margin-top: 32px; }
+.portfolio-list, .activity-list { border: 0; }
+.position-row, .activity-row { border: 0; border-radius: 7px; background: #fff; box-shadow: 0 4px 18px #2942360a; }
+.position-row .sell-position { border: 0; border-radius: 4px; color: #a54e49; background: #f9eeec; }
+.position-row .sell-position:hover { border: 0; background: #b75a52; }
+.empty-portfolio { border: 0; border-radius: 7px; background: #fff; }
+.activity-icon { background: #eaf3ee; color: #286b57; }
+.activity-icon.sell { background: #f8eeec; color: #a54e49; }
+footer { border: 0; color: #89958e; }
+button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid #38856f; outline-offset: 2px; }
+
+@media (max-width: 620px) {
+  .app-shell { width: calc(100% - 24px); }
+  .topbar { min-height: 62px; border: 0; }
+  .terminal-nav { border: 0; }
+  .terminal-nav a { border: 0; }
+  .terminal-heading { padding: 20px 0 15px; }
+  .terminal-heading h1 { font-size: 1.3rem; }
+  .overview { gap: 8px; }
+  .balance-card, .stat-card { border-radius: 7px; }
+  .stat-card { min-height: 90px; }
+  .chart-panel, .market-table-wrap, .trade-panel { border-radius: 7px; }
+}
